@@ -11,6 +11,7 @@ import {
   Status,
   Image,
   HStack,
+  Flex
 } from "@chakra-ui/react";
 
 const HOSTS = [
@@ -27,6 +28,7 @@ const HOSTS = [
 
 function App() {
   const [gpuData, setGpuData] = useState({});
+  const [lastUpdated, setLastUpdated] = useState({});
 
   useEffect(() => {
     const fetchData = () => {
@@ -35,9 +37,10 @@ function App() {
           .then((res) => res.json())
           .then((data) => {
             setGpuData((prev) => ({ ...prev, [host]: data.gpus }));
-            if (host === "kappa") {
-              console.log("kappa data:", data.gpus);
-            }
+            setLastUpdated((prev) => ({
+              ...prev,
+              [host]: new Date().toLocaleTimeString(), // or Date.now()
+            }));
           })
           .catch(() => {
             setGpuData((prev) => ({ ...prev, [host]: null }));
@@ -66,16 +69,24 @@ function App() {
               _dark={{ bg: "gray.800", borderColor: "gray.700" }}
               _hover={{ boxShadow: "md", transform: "translateY(-2px)", transition: "all 0.2s" }}
             >              
+
             <Card.Header>
-                <Heading size="md">
+              <Flex justify="space-between" align="center" w="100%">
                 <HStack spacing={2}>
-                {!gpuData[host] ? (
-                <Status.Root colorPalette="red"> <Status.Indicator /> </Status.Root>) : 
-                (<Status.Root colorPalette="green"><Status.Indicator /></Status.Root>)}
-              {host}<Image src={`/icons/${host}.gif`} boxSize="2vw"/>
-              </HStack>
-                </Heading>
+                  {gpuData[host] ? (
+                    <Status.Root colorPalette="green"><Status.Indicator /></Status.Root>
+                  ) : (
+                    <Status.Root colorPalette="red"><Status.Indicator /></Status.Root>
+                  )}
+                  <Heading size="sm">{host}</Heading>
+                  <Image src={`/icons/${host}.gif`} boxSize="2vw" />
+                </HStack>
+                <Text fontSize="2xs" color="gray.500">
+                  {lastUpdated[host] || "—"}
+                </Text>
+              </Flex>
             </Card.Header>
+
             <Card.Body p={3}>
             {!gpuData[host] ? (
                   <Spinner />
