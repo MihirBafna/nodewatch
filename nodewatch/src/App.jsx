@@ -12,16 +12,15 @@ import {
   Image,
   HStack,
 } from "@chakra-ui/react";
-import minotaur from "./assets/minotaur.gif";
 
 const HOSTS = [
-  "wookiee",
   "minotaur",
+  "cyclops",
+  "asura",
   "dementor",
   "kappa",
-  "asura",
-  "cyclops",
   "charybdis",
+  "wookiee",
   "imp",
 ];
 
@@ -72,42 +71,47 @@ function App() {
                 {!gpuData[host] ? (
                 <Status.Root colorPalette="red"> <Status.Indicator /> </Status.Root>) : 
                 (<Status.Root colorPalette="green"><Status.Indicator /></Status.Root>)}
-              {host}<Image src={minotaur} boxSize="30px" />
+              {host}<Image src={`/icons/${host}.gif`} boxSize="2vw"/>
               </HStack>
                 </Heading>
             </Card.Header>
-              <Card.Body>
-                {!gpuData[host] ? (
-                  <Spinner />
-                ) : (
-                  <Stack spacing={3}>
-                    <Table.Root  fontSize="xs">
+            <Card.Body>
+              {!gpuData[host] ? (
+                <Spinner />
+              ) : (
+                <Box overflowX="auto" whiteSpace="nowrap">
+                  <Table.Root fontSize="xs" minW="600px">
                     <Table.Header>
-                    <Table.Row fontWeight={700}>
-                              <Table.Cell><Text>GPU</Text></Table.Cell>
-                              <Table.Cell>Temp</Table.Cell>
-                              <Table.Cell>Memory</Table.Cell>
-                              <Table.Cell>Utilization</Table.Cell>
-                              <Table.Cell>Processes</Table.Cell>
-                              {/* <Table.Cell textAlign="end">{item.price}</Table.Cell> */}
-                            </Table.Row>
+                      <Table.Row fontWeight={700}>
+                        <Table.Cell>GPU</Table.Cell>
+                        <Table.Cell>Name</Table.Cell>
+                        <Table.Cell>Temp</Table.Cell>
+                        <Table.Cell>Memory</Table.Cell>
+                        <Table.Cell>Utilization</Table.Cell>
+                        <Table.Cell>Processes</Table.Cell>
+                      </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                    {gpuData[host].map((gpu) => (
-                          <Table.Row key={gpu.uuid}>
-                              <Table.Cell><Text>{gpu.index}</Text></Table.Cell>
-                              <Table.Cell>{gpu["temperature.gpu"]}°C</Table.Cell>
-                              <Table.Cell>{gpu["memory.used"]} / {gpu["memory.total"]} MB</Table.Cell>
-                              <Table.Cell>{gpu["utilization.gpu"]}%</Table.Cell>
-                              <Table.Cell>{gpu["user_processes"]}</Table.Cell>
-                              {/* <Table.Cell textAlign="end">{item.price}</Table.Cell> */}
-                            </Table.Row>
+                      {gpuData[host].map((gpu) => (
+                        <Table.Row key={gpu.uuid}>
+                          <Table.Cell whiteSpace="nowrap">{gpu.index}</Table.Cell>
+                          <Table.Cell whiteSpace="nowrap">{gpu.name}</Table.Cell>
+                          <Table.Cell whiteSpace="nowrap">{gpu["temperature.gpu"]}°C</Table.Cell>
+                          <Table.Cell whiteSpace="nowrap">
+                            {gpu["memory.used"]} / {gpu["memory.total"]} MB
+                          </Table.Cell>
+                          <Table.Cell whiteSpace="nowrap">{gpu["utilization.gpu"]}%</Table.Cell>
+                          <Table.Cell whiteSpace="nowrap">
+                            {gpu["user_processes"]}
+                          </Table.Cell>
+                        </Table.Row>
                       ))}
                     </Table.Body>
                   </Table.Root>
-                  </Stack>
-                )}
-              </Card.Body>
+                </Box>
+              )}
+            </Card.Body>
+
             </Card.Root>
           ))}
         </SimpleGrid>
