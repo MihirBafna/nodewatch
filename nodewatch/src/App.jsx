@@ -24,8 +24,6 @@ const HOSTS = [
   "imp",
 ];
 
-import { GiMinotaur } from "react-icons/gi";
-
 
 function App() {
   const [gpuData, setGpuData] = useState({});
@@ -37,6 +35,9 @@ function App() {
           .then((res) => res.json())
           .then((data) => {
             setGpuData((prev) => ({ ...prev, [host]: data.gpus }));
+            if (host === "kappa") {
+              console.log("kappa data:", data.gpus);
+            }
           })
           .catch(() => {
             setGpuData((prev) => ({ ...prev, [host]: null }));
@@ -50,8 +51,8 @@ function App() {
   }, []);
 
   return (
-      <Box p={6} fontSize="xs">
-        <Heading mb={6}>nodewatch</Heading>
+      <Box p={4} fontSize="xs">
+        <Heading mb={6}><HStack>nodeWatch<Image src={`/icons/nodewatcher.gif`} boxSize="2vw"/></HStack></Heading>
         <SimpleGrid columns={[1,2]}  gap="5">
           {HOSTS.map((host) => (
             <Card.Root
@@ -75,10 +76,14 @@ function App() {
               </HStack>
                 </Heading>
             </Card.Header>
-            <Card.Body>
-              {!gpuData[host] ? (
-                <Spinner />
-              ) : (
+            <Card.Body p={3}>
+            {!gpuData[host] ? (
+                  <Spinner />
+                ) : gpuData[host].length === 0 ? (
+                  <Text color="red.400">
+                    No GPU data returned from <b>{host}</b>. Host may be down or unresponsive.
+                  </Text>
+                ) : (
                 <Box overflowX="auto" whiteSpace="nowrap">
                   <Table.Root fontSize="xs" minW="600px">
                     <Table.Header>
