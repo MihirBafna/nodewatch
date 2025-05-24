@@ -6,11 +6,12 @@ import {
   Flex,
   HStack,
   Heading,
+  Spinner,
   Image,
   Text,
   Badge,
   Separator,
-  Status
+  Status,
 } from "@chakra-ui/react";
 
 function sumCPU(cpuUsage) {
@@ -23,7 +24,7 @@ function sumMem(memUsage) {
 
 const CPUCard = ({ host, cpuData, lastUpdated, columnCount }) => {
   return (
-    <Box w={columnCount === 1 ? "50%" : "100%"}>
+    <Box >
       <Card.Root
         border="2px solid"
         borderColor="gray.200"
@@ -32,6 +33,7 @@ const CPUCard = ({ host, cpuData, lastUpdated, columnCount }) => {
         bg="white"
         position="relative"
         height="100%"
+        width= {(columnCount == 1) ? "60%" : "100%"}
         _dark={{ bg: "gray.800", borderColor: "gray.700" }}
         _hover={{ boxShadow: "md", transform: "translateY(-2px)", transition: "all 0.2s" }}
       >
@@ -51,7 +53,10 @@ const CPUCard = ({ host, cpuData, lastUpdated, columnCount }) => {
         <Separator />
 
         <CardBody pt={2} mb={3}>
-          {cpuData && (
+
+        {!cpuData ? (
+              <Spinner />
+            ) : (
             <Box pl={2} pr={5} mt={3}>
               <Flex fontSize="xs" fontWeight="semibold" mb={1} gap={4}>
                 <Text whiteSpace="nowrap">CPU ({cpuData.n_cpus} CORES)</Text>
