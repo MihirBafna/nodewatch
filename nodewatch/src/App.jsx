@@ -161,7 +161,7 @@ function App() {
         </Tabs.List>
 
         <Tabs.Content value="gpu">
-          <SimpleGrid columns={columnCount} gap={5} pt={4}>
+          <SimpleGrid columns={columnCount} gap={5} pt={2}>
             {visibleGpuHosts.map((host) => (
               <GPUCard
                 key={host}
