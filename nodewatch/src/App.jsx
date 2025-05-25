@@ -27,7 +27,7 @@ const animatedComponents = makeAnimated();
 
 function AnimatedMulti({ setSelectedHosts }) {
     const options = [
-    { value: "all", label: "", type: "all" },
+    // { value: "all", label: "all", type: "all" },
     ...GPU_HOSTS.map((host) => ({
         value: host,
         label: host,
