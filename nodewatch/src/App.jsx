@@ -65,6 +65,7 @@ function AnimatedMulti({ setSelectedHosts }) {
 
 
 function App() {
+  const [hostMetaData, setHostMetaData] = useState({});
   const [gpuData, setGpuData] = useState({});
   const [cpuData, setCpuData] = useState({});
   const [lastUpdated, setLastUpdated] = useState({});
@@ -93,6 +94,14 @@ function App() {
                 [host]: "error" in data ? { error: data.error } : data.gpus,
               }));
             }
+            setHostMetaData((prev) => ({
+                ...prev,
+                [host]: {
+                    hostname: data.hostname,
+                    driverVersion: data.driver_version,
+                    queryTime: data.query_time,
+                },
+            }));
             setCpuData(prev => ({ ...prev, [host]: data.cpu }));
             setLastUpdated(prev => ({ ...prev, [host]: new Date().toLocaleTimeString() }));
           })
@@ -159,6 +168,7 @@ function App() {
                 host={host}
                 gpuData={gpuData[host]}
                 cpuData={cpuData[host]}
+                hostMetaData={hostMetaData[host]}
                 lastUpdated={lastUpdated[host]}
                 columnCount={columnCount}
               />

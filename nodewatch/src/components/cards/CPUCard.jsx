@@ -15,6 +15,9 @@ import {
   Stat,
   FormatByte,
 } from "@chakra-ui/react";
+
+import Tooltip from '@mui/material/Tooltip';
+
 import { BarChart } from '@mui/x-charts/BarChart';
 import CPUSummary from "../summaries/CPUSummary";
 
@@ -38,6 +41,18 @@ const CPUCard = ({ host, cpuData, lastUpdated, columnCount }) => {
       >
         <CardHeader pb={1} mb={0}>
           <Flex justify="space-between" align="center" w="100%">
+            <Tooltip
+              title={
+                <>
+                  <div style={{ fontSize: "12px", lineHeight: "1.4" }}>
+                    <b>Host:</b> {host}@csail.mit.edu<br />
+                  </div>
+                </>
+              }
+              arrow
+              placement="top"
+              cursor="pointer"
+            >
             <HStack p={1}>
               <Status.Root colorPalette="green">
                 <Status.Indicator />
@@ -45,6 +60,7 @@ const CPUCard = ({ host, cpuData, lastUpdated, columnCount }) => {
               <Heading size="md">{host}</Heading>
               <Image src={`/icons/${host}.gif`} boxSize="35px" alt="" />
             </HStack>
+            </Tooltip>
             <Badge colorPalette="cyan">CPU</Badge>
           </Flex>
         </CardHeader>

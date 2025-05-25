@@ -15,12 +15,15 @@ import {
   Alert,
   Status,
 } from "@chakra-ui/react";
+
+import Tooltip from '@mui/material/Tooltip';
+
 import { useState } from "react";
 import GPUSummary from "../summaries/GPUSummary";
 import CPUSummary from "../summaries/CPUSummary";
 
 
-const GPUCard = ({ host, gpuData, cpuData, lastUpdated, columnCount }) => {
+const GPUCard = ({ host, gpuData, cpuData, hostMetaData, lastUpdated, columnCount }) => {
   const [showCPU, setShowCPU] = useState(false);
 
   return (
@@ -39,6 +42,19 @@ const GPUCard = ({ host, gpuData, cpuData, lastUpdated, columnCount }) => {
       >
         <CardHeader pb={1} mb={0}>
           <Flex justify="space-between" align="center" w="100%">
+            <Tooltip
+              title={
+                <>
+                  <div style={{ fontSize: "12px", lineHeight: "1.4" }}>
+                    <b>Host:</b> {hostMetaData?.hostname || host}<br />
+                    <b>Driver Version:</b> {hostMetaData?.driverVersion || "N/A"}
+                  </div>
+                </>
+              }
+              arrow
+              placement="top"
+              cursor="pointer"
+            >
             <HStack p={1}>
               {gpuData === null ? (
                 <Status.Root colorPalette="orange"><Status.Indicator /></Status.Root>
@@ -50,6 +66,7 @@ const GPUCard = ({ host, gpuData, cpuData, lastUpdated, columnCount }) => {
               <Heading size="md">{host}</Heading>
               <Image src={`/icons/${host}.gif`} boxSize="35px" alt="" />
             </HStack>
+            </Tooltip>
             <Badge
               colorPalette="pink"
               cursor="pointer"
