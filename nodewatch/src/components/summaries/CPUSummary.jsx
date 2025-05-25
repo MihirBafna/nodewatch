@@ -44,7 +44,7 @@ function buildLoadDataset(cpuUsage = {}, memUsage = {}, totalMem = 1) {
 }
 
 
-const CPUSummary = ({ cpuData }) => {
+const CPUSummary = ({ cpuData, procColor }) => {
   if (!cpuData) return null;
 
   const dataset = buildLoadDataset(cpuData.cpu_usage, cpuData.mem_usage, cpuData.total_mem);
@@ -54,7 +54,7 @@ const CPUSummary = ({ cpuData }) => {
     dataKey: name,
     label: name === "idle" ? "idle" : name,
     stack: "load",
-    color: name === "idle" ? "#e3e5e6" : "#00bcd4",
+    color: name === "idle" ? "#e3e5e6" : procColor,
   }));
 
   return (

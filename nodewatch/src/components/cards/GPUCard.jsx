@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import GPUSummary from "../summaries/GPUSummary";
+import CPUSummary from "../summaries/CPUSummary";
 
 
 const GPUCard = ({ host, gpuData, cpuData, lastUpdated, columnCount }) => {
@@ -75,34 +76,11 @@ const GPUCard = ({ host, gpuData, cpuData, lastUpdated, columnCount }) => {
                     <Alert.Description>{gpuData[host].error}</Alert.Description>
                   </Alert.Content>
                 </Alert.Root>
-              ) : (
+              ) : showCPU ? (
+                <CPUSummary cpuData={cpuData} procColor={"hotpink"} />
+              ): (
                 <GPUSummary gpuData={gpuData}/>
               )}
-
-            {/* CPU Section (for both types) */}
-            {/* {cpuData[host] && (
-              <Box pl={2} pr={5} mt={3}>
-                <Flex fontSize="xs" fontWeight="semibold" mb={1} gap={4}>
-                  <Text whiteSpace="nowrap">CPU ({cpuData[host].n_cpus} CORES)</Text>
-                  <Text>{sumCPU(cpuData[host].cpu_usage).toFixed(0)}%</Text>
-                  <Text>
-                    {sumMem(cpuData[host].mem_usage).toFixed(0)} / {cpuData[host].total_mem.toFixed(0)} (GB)
-                  </Text>
-                </Flex>
-
-                {Object.keys(cpuData[host].cpu_usage)
-                  .filter((name) => cpuData[host].cpu_usage[name] > 0 || cpuData[host].mem_usage[name] > 0)
-                  .map((name) => (
-                    <Flex key={name} fontSize="2xs" gap={4}>
-                      <Text w="80px" isTruncated>{name}</Text>
-                      <Text>{cpuData[host].cpu_usage[name].toFixed(0)}%</Text>
-                      <Text>
-                        {cpuData[host].mem_usage[name].toFixed(0)} / {cpuData[host].total_mem.toFixed(0)} (GB)
-                      </Text>
-                    </Flex>
-                  ))}
-              </Box>
-            )} */}
 
             {/* Timestamp */}
             <Text

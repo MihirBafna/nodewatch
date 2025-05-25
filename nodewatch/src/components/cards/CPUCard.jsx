@@ -77,7 +77,7 @@ const CPUCard = ({ host, cpuData, lastUpdated, columnCount }) => {
                   </Flex>
                 ))} */}
 
-          {cpuData && (<CPUSummary cpuData={cpuData} />)}
+          {cpuData && (<CPUSummary cpuData={cpuData} procColor={"#00bcd4"} />)}
 
             </Box>
           )}
