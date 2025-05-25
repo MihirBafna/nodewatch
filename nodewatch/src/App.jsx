@@ -45,7 +45,7 @@ function AnimatedMulti({ setSelectedHosts }) {
       closeMenuOnSelect={false}
       components={animatedComponents}
       isMulti
-      placeholder="Select hosts..."
+      placeholder="Select nodes..."
       options={options}
       defaultValue={[]}
       onChange={(selected) => {
