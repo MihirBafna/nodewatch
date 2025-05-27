@@ -12,8 +12,6 @@ import {
   Badge,
   Separator,
   Status,
-  Stat,
-  FormatByte,
 } from "@chakra-ui/react";
 
 import Tooltip from '@mui/material/Tooltip';

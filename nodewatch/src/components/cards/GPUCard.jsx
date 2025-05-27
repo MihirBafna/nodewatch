@@ -1,14 +1,12 @@
 import {
   Card,
   CardHeader,
-  CardBody,
   Box,
   Flex,
   HStack,
   Heading,
   Image,
   Text,
-  Table,
   Badge,
   Spinner,
   Separator,
@@ -81,7 +79,6 @@ const GPUCard = ({ host, gpuData, cpuData, hostMetaData, lastUpdated, columnCoun
         <Separator />
 
           <Card.Body pt={2} mb={3}>
-            {/* GPU Section */}
             {
               !gpuData ? (
                 <Spinner />
