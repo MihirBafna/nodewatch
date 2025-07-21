@@ -87,7 +87,7 @@ const GPUCard = ({ host, gpuData, cpuData, hostMetaData, lastUpdated, columnCoun
                   <Alert.Indicator />
                   <Alert.Content>
                     <Alert.Title>Error</Alert.Title>
-                    <Alert.Description>{gpuData[host].error}</Alert.Description>
+                      <Alert.Description>{gpuData?.error || "Unknown error"}</Alert.Description>
                   </Alert.Content>
                 </Alert.Root>
               ) : showCPU ? (
