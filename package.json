@@ -1,6 +1,7 @@
 {
   "name": "nodewatch",
   "private": true,
+  "homepage": "https://bergerlabmit.github.io/nodewatch/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
