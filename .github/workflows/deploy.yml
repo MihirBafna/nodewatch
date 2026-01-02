@@ -35,7 +35,6 @@ jobs:
         with:
           node-version: lts/*
           cache: 'npm'
-        working-directory: nodewatch
       - name: Install dependencies
         run: npm ci
         working-directory: nodewatch
