@@ -37,17 +37,15 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
-        working-directory: nodewatch
       - name: Build
         run: npm run build
-        working-directory: nodewatch
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
           # Upload dist folder
-          path: './nodewatch/dist'
+          path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
