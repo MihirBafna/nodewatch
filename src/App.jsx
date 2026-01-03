@@ -126,7 +126,7 @@ function App() {
         <Heading mb={0} fontSize="2xl">
           nodeWatch
         </Heading>
-        <Image src={`/icons/nodewatcher.gif`} boxSize="40px" alt="nodewatch logo" />
+        <Image src={`/nodewatch/icons/nodewatcher.gif`} boxSize="40px" alt="nodewatch logo" />
       </HStack>
 
       <HStack gap={8}>

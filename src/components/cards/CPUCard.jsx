@@ -56,7 +56,7 @@ const CPUCard = ({ host, cpuData, lastUpdated, columnCount }) => {
                 <Status.Indicator />
               </Status.Root>
               <Heading size="md">{host}</Heading>
-              <Image src={`/icons/${host}.gif`} boxSize="35px" alt="" />
+              <Image src={`/nodewatch/icons/${host}.gif`} boxSize="35px" alt="" />
             </HStack>
             </Tooltip>
             <Badge colorPalette="cyan">CPU</Badge>

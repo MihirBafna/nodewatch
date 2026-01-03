@@ -62,7 +62,7 @@ const GPUCard = ({ host, gpuData, cpuData, hostMetaData, lastUpdated, columnCoun
                 <Status.Root colorPalette="green"><Status.Indicator /></Status.Root>
               )}
               <Heading size="md">{host}</Heading>
-              <Image src={`/icons/${host}.gif`} boxSize="35px" alt="" />
+              <Image src={`/nodewatch/icons/${host}.gif`} boxSize="35px" alt="" />
             </HStack>
             </Tooltip>
             <Badge
